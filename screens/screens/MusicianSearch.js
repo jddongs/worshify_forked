@@ -63,7 +63,7 @@ const MusicianSearch = () => {
 
 
     const handleItemPress = (key) => {
-        console.log('item presseedd', key)
+
         setSelectedItem(key);
         // showModal();
         navigation.navigate('MusicianProfile', { userId: key });
@@ -110,8 +110,6 @@ const MusicianSearch = () => {
                 })
             });
 
-
-
             const musicianScore = musicianDetails.map((musician) => {
                 const instrumentsMusician = musician.instruments;
                 const genreMusician = musician.genre;
@@ -132,18 +130,22 @@ const MusicianSearch = () => {
 
                 const calculatePercentage = ((matchedGenre.length + matchedInstruments.length + genderMatch) / totalItem) * 100;
 
-                console.log(matchedGenre)
-
                 return { ...musician, calculatePercentage };
 
             });
+            // Remove musicians with NaN or 0 percentage
+            const validMusicians = musicianScore.filter((musician) => !isNaN(musician.calculatePercentage) && musician.calculatePercentage > 0);
 
-            const musicianSorted = musicianScore.sort((a, b) => b.calculatePercentage - a.calculatePercentage);
+            // Sort the musicians in descending order of percentage
+            const musicianSorted = validMusicians.sort((a, b) => b.calculatePercentage - a.calculatePercentage);
+
+            // Take the top 5 musicians
             const topMusicians = musicianSorted.slice(0, 5);
-            setMatchedMusicians(topMusicians)
+
+            setMatchedMusicians(topMusicians);
         });
 
-    }, [selectedGenres])
+    }, [selectedGenres, selectedGender, selectedInstruments])
 
 
     const props = {
@@ -190,7 +192,7 @@ const MusicianSearch = () => {
                     </View>
                     <View style={styles.textContainer}>
                         <View style={styles.nameContainer}>
-                            <Text style={styles.nameStyle}>{item.firstName} {item.lastName} {item.calculatePercentage}</Text>
+                            <Text style={styles.nameStyle}>{item.firstName} {item.lastName} <Text style={{ color: "#0EB080" }}>{Math.round(item.calculatePercentage)}%</Text></Text>
                         </View>
 
                         <View style={styles.addressContainer}>
