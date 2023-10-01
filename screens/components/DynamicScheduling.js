@@ -35,7 +35,8 @@ const DynamicScheduling = ({ handleParentModal, gigName, eventType, img, gender,
         const startTimeValid = startTime instanceof Date;
         const endTimeValid = endTime instanceof Date;
 
-        setInputsValid(addressValid && dateValid && startTimeValid && endTimeValid);
+        const allInputsValid = addressValid && dateValid && startTimeValid && endTimeValid;
+        setInputsValid(allInputsValid);
     }, [address, date, startTime, endTime]);
 
     const handleBtn = () => {
@@ -78,21 +79,31 @@ const DynamicScheduling = ({ handleParentModal, gigName, eventType, img, gender,
         setShowPicker(!showPicker)
     };
 
+
+
     const onChange = ({ type }, selectedDate) => {
         if (type == 'set') {
             const currentDate = selectedDate;
-            setDate(new Date(currentDate));
+            const currentDateWithoutTime = new Date(
+                currentDate.getFullYear(),
+                currentDate.getMonth(),
+                currentDate.getDate()
+            );
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
 
-            if (Platform.OS === 'android') {
-                toggleDatepicker()
-                // setDate(currentDate.toDateString());
-                setDate(new Date(currentDate))
-            } else if (Platform.OS === 'ios') {
-                toggleDatepicker()
-                // setDate(currentDate.toDateString());
-                setDate(new Date(currentDate))
+            // Check if the selected date is in the past
+            if (currentDateWithoutTime < today) {
+                // Handle the case where the selected date is in the past
+                // You can show an error message or prevent further action.
+                // For example:
+                alert('Please select a future date.');
+            } else {
+                // Update the date only if it's in the future
+                setDate(currentDate);
             }
 
+            toggleDatepicker();
         } else {
             toggleDatepicker();
         }
@@ -216,7 +227,12 @@ const DynamicScheduling = ({ handleParentModal, gigName, eventType, img, gender,
                     </TouchableOpacity>
 
 
-                    <TouchableOpacity style={{ ...styles.btnContainer, backgroundColor: '#0EB080' }} onPress={() => handleBtn()}>
+                    <TouchableOpacity style={{
+                        ...styles.btnContainer,
+                        backgroundColor: confirmations.length > 0 ? '#0EB080' : 'gray',
+                    }}
+                        onPress={() => handleBtn()}
+                        disabled={confirmations.length === 0}>
                         <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 20 }}>Next</Text>
                     </TouchableOpacity>
 

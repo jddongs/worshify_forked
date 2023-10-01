@@ -22,7 +22,8 @@ const MusicianReg = () => {
     const [opengender, setOpenGender] = useState(false);
     const [itemsGender, setItemsGender] = useState([
         { label: 'Male', value: 'Male' },
-        { label: 'Female', value: 'Female' }
+        { label: 'Female', value: 'Female' },
+        { label: 'Both', value: 'Both' }
     ]);
     const ContentValue = useState(new Animated.Value(-600))[0]
     const [isClicked, setIsClicked] = useState(false);
@@ -80,13 +81,13 @@ const MusicianReg = () => {
                     <View style={styles.headerContainer}>
                         <Text style={styles.header}>Create an Account as <Text style={{ color: '#0EB080' }}>Musician</Text></Text>
                     </View>
-                    <View style={styles.subheaderContainer}>
+                    {/* <View style={styles.subheaderContainer}>
                         <Text style={styles.subHeader}>Do you already have an account?
                             <TouchableOpacity>
                                 <Text style={{ color: '#0EB080' }}> Sign In</Text>
                             </TouchableOpacity>
                         </Text>
-                    </View>
+                    </View> */}
 
                     <View style={styles.inputContainer}>
                         <View style={styles.nameContainer}>
