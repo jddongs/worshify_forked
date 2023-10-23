@@ -39,6 +39,8 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
     const [notification, setNotification] = useState()
     const [ratingsVisible, setRatingsVisible] = useState(false);
     const [rating, setRating] = useState(3);
+    const [ratingTwo, setRatingTwo] = useState(3);
+    const [ratingThree, setRatingThree] = useState(3);
     const [review, setReview] = useState('');
     // const [counter, setCounter] = useState(0);
     const showGigModal = () => setModalVisible(true);
@@ -121,6 +123,7 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
                 };
 
                 setPostDetails(gigData);
+                setGigStatus(gigData.GigStatus)
             } else {
                 handleBtnClose(false)
             }
@@ -139,6 +142,7 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
         });
 
     }, [postID])
+
 
 
     useEffect(() => {
@@ -175,10 +179,6 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
             setGenre(data);
         })
     }, [])
-
-
-
-
     useEffect(() => {
         const usersAppliedRef = ref(db, 'gigPosts/' + postID + '/usersApplied');
         onValue(usersAppliedRef, (snapshot) => {
@@ -225,12 +225,14 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
         try {
             const snapshot = await get(ratingRef);
             const existingData = snapshot.val();
+            // Calculate average rating
+            const averageRating = Math.round((parseInt(rating) + parseInt(ratingTwo) + parseInt(ratingThree)) / 3);
 
             if (existingData) {
                 // // Update existing data
                 const newData = {
                     ...existingData,
-                    rating,
+                    averageRating,
                     review,
 
                 };
@@ -241,7 +243,7 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
             } else {
                 // Create new data if it doesn't exist
                 const newData = {
-                    rating: rating,
+                    rating: averageRating,
                     review: review,
                     userName: userData.firstName,
                     userLname: userData.lastName,
@@ -262,15 +264,8 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
         }
 
     }
-
-
-
     //notify applied musicians if gig is edited
-
-
     const props = { userId, postID };
-
-
     //handles Gig Archive
     const archiveGig = () => {
         const archiveRef = ref(db, 'archiveGigs/' + uid + '/' + postID)
@@ -279,10 +274,6 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
         handleBtnClose(false);
         deleteGig();
     }
-
-
-
-
     const deleteGig = async () => {
         setLoading(true);
         const dbRefUser = ref(db, 'gigPosts/' + postID)
@@ -305,7 +296,9 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
 
     //handles the rating visibility
     useEffect(() => {
-        if (gigStatus === 'Done') {
+        setGigStatus(postDetails.GigStatus);
+
+        if (postDetails.GigStatus === 'Done') {
             showAccepted()
         }
     }, [gigStatus])
@@ -357,7 +350,6 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
 
     useEffect(() => {
         const addresses = schedule.map(item => item.date);
-        console.log(addresses[selectedIndex]);
     }, [selectedIndex])
 
 
@@ -365,6 +357,10 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
     const date = schedule.map(item => item.date);
     const start = schedule.map(item => item.startTime);
     const end = schedule.map(item => item.endTime);
+
+    useEffect(() => {
+        console.log(schedule[0].date);
+    }, [])
 
 
     const handleGigModal = () => {
@@ -621,8 +617,6 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
                                 <Text style={{ fontWeight: 'bold' }}>Schedule and Location</Text>
                                 {visible ? (
                                     <View style={styles.modalDetails}>
-
-
                                         <View style={{ marginTop: 15 }}>
                                             <Text>Date:</Text>
                                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -812,8 +806,13 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
                 {selectedUserKey && ratingsVisible && acceptedUsers.some((user) => user.key === selectedUserKey) && (
                     <View style={styles.ratingsContainer}>
                         <View style={styles.ratingBorder}>
+
                             <View style={styles.ratingTitle}>
-                                <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Ratings and Reviews</Text>
+                                <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Ratings and Feedbacks</Text>
+                            </View>
+
+                            <View style={styles.ratingTitle}>
+                                <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Appropriateness</Text>
                             </View>
 
                             {/* Add the rating component here */}
@@ -822,8 +821,35 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
                                 count={5}
                                 defaultRating={3}
                                 showRating={true}
-                                size={40}
+                                size={20}
                                 onFinishRating={(rating) => setRating(rating)}
+                            />
+
+                            <View style={styles.ratingTitle}>
+                                <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Punctuality</Text>
+                            </View>
+
+                            <AirbnbRating
+                                reviews={["Poor", "Fair", "Good", "Very Good", "Excellent"]}
+                                count={5}
+                                defaultRating={3}
+                                showRating={true}
+                                size={20}
+                                onFinishRating={(rating) => setRatingTwo(rating)}
+                            />
+
+                            <View style={styles.ratingTitle}>
+                                <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Skills</Text>
+                            </View>
+
+
+                            <AirbnbRating
+                                reviews={["Poor", "Fair", "Good", "Very Good", "Excellent"]}
+                                count={5}
+                                defaultRating={3}
+                                showRating={true}
+                                size={20}
+                                onFinishRating={(rating) => setRatingThree(rating)}
                             />
 
                             {/* Add the review input component here */}
@@ -903,13 +929,14 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         elevation: 5,
         alignItems: 'center',
-        padding: 20
+        padding: 20,
+
     },
     modalContainer: {
         height: '100%',
         width: '100%',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     schedItem: {
         borderWidth: 2,
@@ -991,7 +1018,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 10,
         marginTop: 10,
-        height: '35%'
+        height: '20%'
     },
     ratingTitles: {
         borderColor: 'lightgray',
@@ -1009,8 +1036,8 @@ const styles = StyleSheet.create({
     },
     ratingBorder: {
         borderWidth: 0.5,
-        height: '60%',
-        width: '90%',
+        height: '100%',
+        width: '100%',
         backgroundColor: '#F9F9F9',
         borderRadius: 15
     },
@@ -1018,7 +1045,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height: screenHeight,
-        width: screenWidth,
+        width: screenWidth
     },
     appBarStyle: {
         backgroundColor: '#151414',
