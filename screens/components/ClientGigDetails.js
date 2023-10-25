@@ -153,7 +153,8 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
                 key: snapshot.key,
                 firstName: snapshot.val().first_name,
                 lastName: snapshot.val().lname,
-                profilePic: snapshot.val().profile_pic
+                profilePic: snapshot.val().profile_pic,
+                banningPoints: snapshot.val().banningPoints
             };
             setUserData(userData)
         });
@@ -180,6 +181,71 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
             setGenre(data);
         })
     }, [])
+
+
+    // useEffect(() => {
+    //     const musicianRef = ref(db, 'users/musician/')
+    //     let musicianDetails = [];
+    //     onValue(musicianRef, (snapshot) => {
+    //         snapshot.forEach((childSnapshot) => {
+    //             musicianDetails.push({
+    //                 key: childSnapshot.key,
+    //                 firstName: childSnapshot.val().first_name,
+    //                 lastName: childSnapshot.val().lname,
+    //                 address: childSnapshot.val().address,
+    //                 profilePic: childSnapshot.val().profile_pic,
+    //                 uid: childSnapshot.val().uid,
+    //                 instruments: childSnapshot.val().instruments,
+    //                 genre: childSnapshot.val().genre,
+    //                 gender: childSnapshot.val().gender
+    //             })
+    //         });
+
+    //         const musicianScore = musicianDetails.map((musician) => {
+    //             const instrumentsMusician = musician.instruments;
+    //             const genreMusician = musician.genre;
+    //             const genderMusician = musician.gender;
+
+
+    //             setMusicianGenre(genreMusician);
+    //             setMusicianInstrument(instrumentsMusician);
+    //             setMusicianGender(genderMusician);
+
+    //             // Check for gender match
+    //             const genderMatch = selectedGender === genderMusician ? 1 : 0;
+
+    //             const totalItem = genderMatch + selectedInstruments.length + selectedGenres.length;
+
+    //             const matchedGenre = genreMusician.filter((genre) => selectedGenres.includes(genre));
+    //             const matchedInstruments = instrumentsMusician.filter((instrument) => selectedInstruments.includes(instrument));
+
+    //             const calculatePercentage = ((matchedGenre.length + matchedInstruments.length + genderMatch) / totalItem) * 100;
+
+    //             return { ...musician, calculatePercentage };
+
+    //         });
+    //         // Remove musicians with NaN or 0 percentage
+    //         const validMusicians = musicianScore.filter((musician) => !isNaN(musician.calculatePercentage) && musician.calculatePercentage > 0);
+
+    //         // Sort the musicians in descending order of percentage
+    //         const musicianSorted = validMusicians.sort((a, b) => b.calculatePercentage - a.calculatePercentage);
+
+    //         // Take the top 5 musicians
+    //         const topMusicians = musicianSorted.slice(0, 5);
+
+    //         setMatchedMusicians(topMusicians);
+    //     });
+
+    // }, [selectedGenres, selectedGender, selectedInstruments])
+
+
+    useEffect(() => {
+        appliedUsers.map((item) => {
+            console.log(item.key)
+        })
+    }, [])
+
+
     useEffect(() => {
         const usersAppliedRef = ref(db, 'gigPosts/' + postID + '/usersApplied');
         onValue(usersAppliedRef, (snapshot) => {
@@ -211,6 +277,8 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
             // getAcceptedUsers()
 
         });
+
+        console.log(appliedUsers)
     }, []);
 
     const getAcceptedUsers = () => {
@@ -294,6 +362,8 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
             }
         })
     }, [counter])
+
+
 
     //handles the rating visibility
     useEffect(() => {
@@ -415,9 +485,9 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
     }
 
 
-   // useEffect(() => {
-   //     console.log(schedule[0].date);
-   // }, [])
+    // useEffect(() => {
+    //     console.log(schedule[0].date);
+    // }, [])
 
 
     const handleBanPoints = () => {
@@ -428,7 +498,7 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
 
         if (daysDifference <= 3) {
             // Show the confirmation modal
-            setShowConfirmationModal(true);
+            // setShowConfirmationModal(true);
             // Client is trying to cancel within 3 days of the first scheduled date
             const banningPoints = userData.banningPoints || 0; // Get current banning points from the database
             if (banningPoints < 3) {
@@ -456,6 +526,10 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
     const handleCancelStatus = () => {
         const dbRefUser = ref(db, 'gigPosts/' + postID)
         const dbRef = ref(db, 'users/client/' + uid + '/gigs/' + postID);
+
+        setShowConfirmationModal(true);
+
+        handleBanPoints();
 
         update(dbRefUser, {
             gigStatus: 'Cancel'
