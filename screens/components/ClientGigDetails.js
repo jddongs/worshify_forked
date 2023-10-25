@@ -415,9 +415,9 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
     }
 
 
-    useEffect(() => {
-        console.log(schedule[0].date);
-    }, [])
+   // useEffect(() => {
+   //     console.log(schedule[0].date);
+   // }, [])
 
 
     const handleBanPoints = () => {
