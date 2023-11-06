@@ -632,11 +632,11 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
     const handleDoneStatus = () => {
         const dbRefUser = ref(db, 'gigPosts/' + postID);
         const dbRef = ref(db, 'users/client/' + uid + '/gigs/' + postID);
-        const userRef = ref(db, 'users/client/' + uid);
+        const userRef = ref(db, 'users/logged_users/' + uid);
 
         // Iterate through acceptedUserKeys array
         acceptedUserKeys.forEach((userKey) => {
-            const musicianRef = ref(db, 'users/musician/' + userKey);
+            const musicianRef = ref(db, 'users/logged_users/' + userKey);
 
             // Start a transaction to increment gigsCompleted value atomically for musicianRef
             // Inside the runTransaction callback for musicianRef
