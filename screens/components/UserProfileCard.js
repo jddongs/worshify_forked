@@ -228,7 +228,8 @@ const styles = StyleSheet.create({
     },
     emailTxtStyle: {
         color: 'white',
-        marginLeft: 7
+        marginLeft: 7,
+        marginTop: 7
     },
     emailContainer: {
         flexDirection: 'row',
@@ -241,7 +242,8 @@ const styles = StyleSheet.create({
     },
     addressTxtStyle: {
         color: 'white',
-        marginLeft: 7
+        marginLeft: 7,
+        marginTop: 7
     },
     rootContainer: {
         height: '70%',
@@ -280,6 +282,7 @@ const styles = StyleSheet.create({
     textName: {
         color: 'white',
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginTop: 5
     }
 })
