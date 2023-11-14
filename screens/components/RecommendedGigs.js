@@ -180,28 +180,16 @@ const RecommendedGigs = () => {
 
 
 
+   
     return (
         <View style={styles.rootContainer}>
             <FlatList
                 data={recommendedGigs}
                 renderItem={renderItem}
-                keyExtractor={(item) => item.postID}
+                keyExtractor={(item) => item.key}
                 ItemSeparatorComponent={renderSeparator}
                 horizontal
-                refreshing
             />
-
-            <Modal
-                visible={modalVisible}
-                animationType='slide'
-                onRequestClose={hideModal}
-            >
-                <Appbar.Header style={styles.appBarStyle}>
-                    <Appbar.BackAction onPress={hideModal} color='white' />
-                </Appbar.Header>
-
-                <GigDetails {...props} />
-            </Modal>
 
         </View>
 
@@ -211,62 +199,76 @@ const RecommendedGigs = () => {
 export default RecommendedGigs
 
 const styles = StyleSheet.create({
-    appBarStyle: {
-        backgroundColor: '#151414',
-    },
     percentageStyle: {
-        fontSize: 20,
-        color: '#0EB080',
-        fontWeight: 'bold',
-        width: '100%',
-        textAlign: 'right'
+      fontSize: 20, 
+      color: 'white',
+      fontWeight: 'bold',
+      position: 'absolute',
+      bottom: 5,
+      right: 5,
+      backgroundColor: 'rgba(14, 176, 128, 0.7)',
+      borderRadius: 5,
+      padding: 2,
     },
     rootContainer: {
-        flexDirection: 'row',
-        height: '100%',
+     paddingTop: 10,
+      flexDirection: 'row',
+      height: '100%',
+      
     },
     container: {
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        height: '100%',
-        width: screenWidth / 1.20,
-        padding: 10,
-        backgroundColor: '#3C3C43',
-        borderRadius: 15,
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100%',
+      width: screenWidth / 1.23,
+      padding: 10,
+      backgroundColor: '#35383F',
+      borderRadius: 10,
     },
     imageContainer: {
-        height: '65%',
-        width: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 15,
+      height: '80%',
+      width: '100%',
+      borderRadius: 15,
+      overflow: 'hidden',
+      position: 'relative',
     },
     nameContainer: {
-        backgroundColor: '#3C3C43',
-        width: '100%',
-        height: '15%',
-        marginTop: 10,
+      backgroundColor: '#35383F',
+      width: '100%',
+      height: '20%', 
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 5,
+      borderRadius: 10,
     },
     imgStyle: {
-        height: '100%',
-        width: '100%',
-        borderRadius: 15,
-        overflow: 'hidden'
+      height: '100%',
+      width: '100%',
+      borderRadius: 15,
+      overflow: 'hidden',
     },
     titleStyle: {
-        color: 'white',
-        fontSize: 20,
-        fontWeight: 'bold'
+      color: '#0EB080',
+      fontSize: 23,
+      fontWeight: 'bold',
     },
     dateAddressStyle: {
-        height: '20%',
-        width: '100%',
-        justifyContent: 'center'
+      height: '15%',
+      width: '100%',
+      justifyContent: 'space-between',
+    
     },
     addressStyle: {
         flexDirection: 'row',
-    },
-    dateStyle: {
+        alignItems: 'center',
+        fontSize: 12, 
+        marginVertical: -8, 
+      },
+      dateStyle: {
         flexDirection: 'row',
-    }
-})
+        alignItems: 'center',
+        fontSize: 12, 
+        marginVertical: 4, 
+    },
+  });
+  

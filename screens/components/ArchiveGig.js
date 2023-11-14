@@ -29,17 +29,14 @@ const ArchiveGig = ({ postID }) => {
             const gigData = {
                 key: snapshot.key,
                 Event_Type: snapshot.val().Event_Type,
-                GigAddress: snapshot.val().GigAddress,
                 postID: snapshot.val().postID,
                 GigName: snapshot.val().GigName,
                 uid: snapshot.val().uid,
                 GenreNeeded: snapshot.val().GenreNeeded,
-                StartTime: snapshot.val().StartTime,
-                EndTime: snapshot.val().EndTime,
                 InstrumentsNeeded: snapshot.val().InstrumentsNeeded,
                 GigImage: snapshot.val().GigImage,
-                GigDate: snapshot.val().GigDate,
-                about: snapshot.val().about
+                about: snapshot.val().about,
+                sched: snapshot.val().schedule
             };
 
             setPostDetails(gigData);

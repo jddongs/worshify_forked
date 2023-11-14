@@ -136,6 +136,7 @@ const ClientGigDetails = ({ postID, handleBtnClose }) => {
                 setGigStatus(gigData.GigStatus)
                 setGigGenre(gigData.GenreNeeded)
                 // setGigInstrument(gigData.InstrumentsNeeded);
+                
             } else {
                 handleBtnClose(false)
             }

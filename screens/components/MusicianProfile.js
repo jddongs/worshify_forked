@@ -144,7 +144,7 @@ const MusicianProfile = () => {
         hideDialog()
     };
 
-    const props = { userId, chatExist, chatRefKey };
+    const props = { userId, chatExist, chatRefKey }
 
     const handleClick = () => {
         if (chatExist) {

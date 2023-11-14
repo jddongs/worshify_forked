@@ -239,9 +239,10 @@ const MusicianSearch = () => {
                             keyExtractor={(item) => item.key}
                             ItemSeparatorComponent={renderSeparator}
                         />
-                        <TouchableOpacity onPress={() => setIsFilterApplied(false)}>
-                            <MaterialIcons name="cancel" size={70} color="#0EB080" />
+                        <TouchableOpacity onPress={() => setIsFilterApplied(false)} style={{ paddingTop: 8 }}>
+                        <MaterialIcons name="cancel" size={65} color="#0EB080" />
                         </TouchableOpacity>
+
                     </View>
                 ) : (
                     // Render original gigs
@@ -252,9 +253,10 @@ const MusicianSearch = () => {
                         ItemSeparatorComponent={renderSeparator}
                     />
                 )}
-                <TouchableOpacity style={styles.btnContainer} onPress={showGigModal}>
-                    <Ionicons name="search-circle-sharp" size={70} color="#0EB080" />
-                </TouchableOpacity>
+               <TouchableOpacity style={styles.btnContainer} onPress={showGigModal}>
+  <Ionicons name="search-circle-sharp" size={70} color="#0EB080" />
+</TouchableOpacity>
+
             </View>
 
             <Modal
@@ -289,13 +291,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#151414'
     },
     btnContainer: {
-        padding: 5,
         bottom: screenHeight / 3.5,
-        width: '25%',
+        width: '58%',
         left: 250,
         zIndex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        position: 'absolute'
     },
     appBarHeader: {
         backgroundColor: '#151414',

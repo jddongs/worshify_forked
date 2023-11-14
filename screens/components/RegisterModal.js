@@ -52,32 +52,25 @@ const RegisterModal = ({ moveLoginModal }) => {
                 (
 
                     <View style={styles.container}>
-                        <View style={styles.regContainer}>
-                            <Text style={styles.RegTxt}>Register</Text>
-                        </View>
+          <View style={styles.regContainer}>
+            <Text style={styles.RegTxt}>Register</Text>
+          </View>
 
-                        <View style={styles.typeContainer}>
-                            <Text style={styles.typeTxt}>Select Your Role!</Text>
-                        </View>
+          <View style={styles.typeContainer}>
+            <Text style={styles.typeTxt}>Select Your Role!</Text>
+          </View>
 
-                        <View
-                            style={styles.buttonContainer}>
-                            <TouchableOpacity
-                                onPress={handleClient}
-                                style={styles.button}>
-                                <FontAwesome5 name="user-tie" size={60} color="white" />
-                                <Text style={styles.buttonText}>Client</Text>
-                            </TouchableOpacity>
+                        <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={handleClient} style={{ ...styles.button, marginRight: 10 }}>
+              <FontAwesome5 name="user-tie" size={35} color="white" />
+              <Text style={styles.buttonText}>Client</Text>
+            </TouchableOpacity>
 
 
-                            <TouchableOpacity
-                                onPress={handleMusician}
-                                style={[styles.button, styles.buttonOutline]}>
-                                <MaterialCommunityIcons name="account-music-outline" size={70} color="#0EB080" />
-                                <Text style={styles.buttonOutlineText}>
-                                    Musician
-                                </Text>
-                            </TouchableOpacity>
+            <TouchableOpacity onPress={handleMusician} style={{ ...styles.button, ...styles.buttonOutline }}>
+              <MaterialCommunityIcons name="account-music-outline" size={40} color="#0EB080" />
+              <Text style={styles.buttonOutlineText}>Musician</Text>
+            </TouchableOpacity>
                         </View>
 
                         <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
@@ -96,79 +89,73 @@ const RegisterModal = ({ moveLoginModal }) => {
     )
 }
 
-export default RegisterModal
+export default RegisterModal;
 
 const styles = StyleSheet.create({
-    root: {
-        height: '100%',
-        width: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: 'relative',
-
-    },
-    container: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
-        width: '100%',
-        height: '100%',
-
-    },
-    regContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        bottom: '15%',
-    },
-    RegTxt: {
-        fontSize: 24,
-        fontWeight: 'bold'
-    },
-    typeContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        bottom: '7%',
-
-    },
-    typeTxt: {
-        fontSize: 15,
-        fontWeight: 'normal'
-    },
-    buttonContainer: {
-        width: "100%",
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
-        marginTop: 40,
-        flexDirection: 'row',
-        bottom: '5%',
-
-    },
-    button: {
-        backgroundColor: '#0EB080',
-        width: '50%',
-        alignItems: 'center',
-        paddingVertical: '15%',
-        borderRadius: 10,
-        borderWidth: 2,
-        borderColor: '#0EB080'
-    },
-    buttonOutline: {
-        backgroundColor: '#F9F9F9',
-        borderColor: '#0EB080',
-        borderWidth: 2,
-
-    },
-    buttonText: {
-        color: '#F9F9F9',
-        fontWeight: '700',
-        fontSize: 16,
-        marginTop: "5%",
-
-    },
-    buttonOutlineText: {
-        color: '#0EB080',
-        fontWeight: '700',
-        fontSize: 16,
-    }
-})
+  root: {
+    height: '100%',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+  },
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    width: '100%',
+    height: '60%',
+  },
+  regContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    bottom: '15%',
+  },
+  RegTxt: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  typeContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    bottom: '7%',
+  },
+  typeTxt: {
+    fontSize: 15,
+    fontWeight: 'normal',
+  },
+  buttonContainer: {
+    width: "100%",
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    marginTop: 40,
+    flexDirection: 'row',
+    bottom: '5%',
+  },
+  button: {
+    backgroundColor: '#0EB080',
+    width: '45%',
+    alignItems: 'center',
+    paddingVertical: '10%',
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: '#0EB080',
+  },
+  buttonOutline: {
+    backgroundColor: '#F9F9F9',
+    borderColor: '#0EB080',
+    borderWidth: 1,
+  },
+  buttonText: {
+    color: '#F9F9F9',
+    fontWeight: '700',
+    fontSize: 16,
+    marginTop: "5%",
+  },
+  buttonOutlineText: {
+    color: '#0EB080',
+    fontWeight: '700',
+    fontSize: 16,
+  },
+});

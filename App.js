@@ -134,7 +134,7 @@ function BottomTab() {
 
 
         <Tab.Screen
-          name='Contacts'
+          name='Message'
           component={ContactNav}
           options={{
             tabBarIcon: ({ color, size }) => (
@@ -159,10 +159,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   tabBar: {
-    height: 55,
+    height: '8%',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     overflow: 'hidden',
+    
   },
   tabBarIconActive: {
     color: '#0EB080',

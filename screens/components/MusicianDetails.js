@@ -224,9 +224,9 @@ const MusicianDetails = ({ userId }) => {
                                             </View>
                                         </View>
                                         <View style={styles.revContainer}>
-                                            <Text>
-                                                {rev.review}
-                                            </Text>
+                                        <Text >
+                                        {rev.review}
+                                        </Text>
                                         </View>
                                     </View>
                                 )
@@ -253,13 +253,13 @@ const styles = StyleSheet.create({
         paddingBottom: 750,
     },
     revRootContainer: {
-        width: '60%',
-        marginRight: 20,
+        width: '15%',
+        marginRight: 35,
         height: 100,
         marginTop: 10,
         borderWidth: 1,
-        padding: 10,
-        borderRadius: 10,
+        padding: 5,
+        borderRadius: 9,
 
     },
     scrollViewContents: {
@@ -267,13 +267,15 @@ const styles = StyleSheet.create({
         paddingRight: 500
     },
     revContainer: {
-        width: '60%'
+        width: '80%',
+        
     },
     rootContainer: {
         width: screenWidth,
         height: 120
     },
     txtContainer: {
+        padding: 10,
         width: '100%',
         alignItems: 'flex-start'
     },
@@ -346,7 +348,7 @@ const styles = StyleSheet.create({
         borderTopWidth: 0.5,
         borderTopColor: '#000000',
         padding: 20,
-        height: '23%'
+        height: '50%'
 
     },
     titleContainer: {

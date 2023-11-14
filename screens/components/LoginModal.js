@@ -93,20 +93,20 @@ const LoginModal = ({ moveRegModal }) => {
                             style={{ color: isFocused || password ? '#0EB080' : '#606060' }}
                             {...props} />} />
 
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                    <Text style={{ ...styles.Ftext, textAlign: 'left', marginRight: 15 }}>
-                        Don't have an account yet?
-                    </Text>
+<View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+    <Text style={{ ...styles.Ftext, textAlign: 'left' }}>
+        Don't have an account yet?
+    </Text>
 
                     {/* <TouchableOpacity style={{ marginTop: 5 }}>
                         <Text style={styles.Ftext}>Forgot your password?</Text>
                     </TouchableOpacity> */}
-                    <TouchableOpacity onPress={() => moveRegModal()}>
-                        <Text style={{
-                            color: "#0EB080", fontWeight: 'bold', width: '100%'
-                        }}>Sign up</Text>
-                    </TouchableOpacity>
-                </View>
+                     <TouchableOpacity onPress={() => moveRegModal()}>
+        <Text style={{
+            color: "#0EB080", fontWeight: 'bold', width: '100%', marginTop: '10%', textAlign: 'right'
+        }}>Sign up</Text>
+    </TouchableOpacity>
+</View>
 
                 {/* <TouchableOpacity onPress={() => moveRegModal()}>
                     <Text style={{ color: "#0EB080", fontWeight: 'bold', width: '20%' }}>Sign up</Text>
@@ -189,5 +189,6 @@ const styles = StyleSheet.create({
         color: '#0EB080',
         fontWeight: '700',
         fontSize: 16
-    }
+    },
+    
 })

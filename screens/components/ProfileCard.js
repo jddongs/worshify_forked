@@ -59,14 +59,14 @@ const ProfileCard = ({ userId }) => {
                             <Text style={styles.accountTypeStyle}>{userDetails.accountType}</Text>
                         </View>
                         <View style={styles.addressStyle}>
-                            <Entypo name="location" size={12} color="#0EB080" />
+                            <Entypo name="location" size={15} color="#0EB080" />
                             <Text style={styles.addressTxtStyle}>
                                 {userDetails.address}
                             </Text>
                         </View>
 
                         <View style={styles.emailContainer}>
-                            <MaterialCommunityIcons name="email-outline" size={12} color="#0EB080" />
+                            <MaterialCommunityIcons name="email-outline" size={15} color="#0EB080" />
                             <Text style={styles.emailTxtStyle}>{userDetails.email}</Text>
                         </View>
 
@@ -91,7 +91,8 @@ const styles = StyleSheet.create({
     },
     emailTxtStyle: {
         color: 'white',
-        marginLeft: 7
+        marginLeft: 7,
+        marginTop:10
     },
     emailContainer: {
         flexDirection: 'row',
@@ -104,7 +105,8 @@ const styles = StyleSheet.create({
     },
     addressTxtStyle: {
         color: 'white',
-        marginLeft: 7
+        marginLeft: 7,
+        marginTop:10
     },
     rootContainer: {
         height: '100%',
@@ -138,6 +140,7 @@ const styles = StyleSheet.create({
         height: '100%',
         width: '75%',
         padding: 10,
+        marginTop: 10
     },
     textName: {
         color: 'white',
